@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<definitions xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="urn:soa" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:soa">
+<types>
+<xsd:schema targetNamespace="urn:soa"
+>
+ <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+ <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+</xsd:schema>
+</types>
+<message name="SimpleHash.EncodeRequest">
+  <part name="string" type="xsd:string" /></message>
+<message name="SimpleHash.EncodeResponse">
+  <part name="return" type="xsd:string" /></message>
+<message name="SimpleHash.DecodeRequest">
+  <part name="string" type="xsd:string" /></message>
+<message name="SimpleHash.DecodeResponse">
+  <part name="return" type="xsd:string" /></message>
+<portType name="soaPortType">
+  <operation name="SimpleHash.Encode">
+    <input message="tns:SimpleHash.EncodeRequest"/>
+    <output message="tns:SimpleHash.EncodeResponse"/>
+  </operation>
+  <operation name="SimpleHash.Decode">
+    <input message="tns:SimpleHash.DecodeRequest"/>
+    <output message="tns:SimpleHash.DecodeResponse"/>
+  </operation>
+</portType>
+<binding name="soaBinding" type="tns:soaPortType">
+  <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+  <operation name="SimpleHash.Encode">
+    <soap:operation soapAction="http://lta1soa.appspot.com/service.php/SimpleHash.Encode" style="rpc"/>
+    <input><soap:body use="encoded" namespace="" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="SimpleHash.Decode">
+    <soap:operation soapAction="http://lta1soa.appspot.com/service.php/SimpleHash.Decode" style="rpc"/>
+    <input><soap:body use="encoded" namespace="" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+</binding>
+<service name="soa">
+  <port name="soaPort" binding="tns:soaBinding">
+    <soap:address location="http://lta1soa.appspot.com:/service.php"/>
+  </port>
+</service>
+</definitions>
